@@ -7,17 +7,26 @@
   <body>
     <button onclick="topFunction()" id="btt" title="Back to top">Back to Top</button>
     <script>
-    var backtotop = document.getElementById("btt");
+    // Dynamic Back-to-Top Link Button    
+var offset = 350,
+    duration = 600,
+    btt = $('#back-to-top');
 
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        backtotop.style.display = "block";
+$(window).scroll(function() {
+    if(btt.css("position") !== "static") {   
+      if ($(this).scrollTop() > offset) {
+          btt.fadeIn(duration);
       } else {
-        backtotop.style.display = "none";
+          btt.fadeOut(duration);
       }
     }
+  });
+
+    $('#back-to-top').click(function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+          return false;
+    });
 
     function topFunction() {
       document.body.scrollTop = 0;
